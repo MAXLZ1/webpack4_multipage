@@ -34,7 +34,6 @@ const pagesSetting = () => {
         } else {
             console.log(chalk.red(`${path.resolve(file, '..')}目录下无模板文件`))
         }
-
     });
     return {
         entries,
@@ -102,7 +101,7 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options:{
-                            limit: 1024 * 12, // 文件小于20kb，输出DataUrl
+                            limit: 1024 * 12, // 文件小于12kb，输出DataUrl
                             outputPath: 'images', // 该路径相对于html输出路径
                             publicPath: '../../images',
                             name: '[name].[ext]'
@@ -147,8 +146,14 @@ module.exports = {
     devServer: {
         host: "localhost",
         open: true,
-        contentBase: path.join(__dirname,"dist"),
         port: 8081,
-        compress: true
+        compress: true,
+        historyApiFallback:{
+            rewrites:[
+                {from: /^\/page1/, to: '/pages/test_demo_01/test_demo_01.html'},
+                {from: /^\/page2/, to: '/pages/test_demo_02/test_demo_02.html'},
+                {from: /./, to: '/pages/test_demo_01/test_demo_01.html'},
+            ]
+        }
     }
 };
