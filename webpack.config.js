@@ -102,8 +102,8 @@ module.exports = {
                         loader: 'url-loader',
                         options:{
                             limit: 1024 * 12, // 文件小于12kb，输出DataUrl
-                            outputPath: 'images', // 该路径相对于html输出路径
-                            publicPath: '../../images',
+                            outputPath: 'assets/images', // 该路径相对于html输出路径
+                            publicPath: '../../assets/images',
                             name: '[name].[ext]'
                         }
                     }
@@ -121,6 +121,19 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test:/\.(woff2?|woff|svg|eot|ttf)(\?.*)?$/,
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            name:"[name].[ext]",
+                            limit: 1024 * 5,
+                            outputPath:'assets/fonts/'
+                        }
+                    }
+                ]
+            }
         ]
     },
     plugins: [
