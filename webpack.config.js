@@ -6,6 +6,7 @@ const HtmlWebpackPlugin =  require('html-webpack-plugin'); // 将打包后js自�
 const {CleanWebpackPlugin} = require('clean-webpack-plugin'); // 清除打包文件工具
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 分离css
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // css压缩去重
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // 可视化分析
 const cleanPath = [path.join(__dirname, './dist')];
 // 多页面配置函数
 const pagesSetting = () => {
@@ -154,7 +155,8 @@ module.exports = {
                     ],
             },
             canPrint: true
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     devServer: {
         host: "localhost",
